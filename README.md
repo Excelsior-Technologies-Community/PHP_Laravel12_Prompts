@@ -1,59 +1,409 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PHP_Laravel12_Prompts
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Description
 
-## About Laravel
+PHP_Laravel12_Prompts is a Laravel 12 based CLI project that demonstrates how to create interactive command-line prompts.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+It allows you to:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Collect user input via the terminal using text, password, confirmation, and selection prompts.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Simulate workflows like user registration in a CLI environment.
 
-## Learning Laravel
+Provide a menu interface to select and run multiple commands interactively.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Practice Laravel Artisan commands and understand how to handle interactive CLI input without requiring third-party packages (fully compatible with Laravel 12).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Technologies Used:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Laravel 12 – PHP framework for building the project.
 
-### Premium Partners
+2. PHP 8.x – Core language for the application.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. MySQL – Database support (optional, for future use).
 
-## Contributing
+4. Artisan CLI – Built-in Laravel console tool for running commands.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Features
 
-## Security Vulnerabilities
+1. Interactive CLI Experience – Engage with the terminal using prompts for text, password, confirmation, and choice selection.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. User Registration Simulation – Collect user email, password, and terms acceptance interactively.
 
-## License
+3. Command Menu System – Central menu to run multiple CLI commands effortlessly.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Laravel 12 Compatibility – Fully functional without extra packages, using built-in Artisan methods.
+
+5. Real-time Input Validation – Ensures required inputs are collected before proceeding.
+
+6. Flexible & Extendable – Easily add new commands, prompts, or workflows for demos or projects.
+
+7. Lightweight & Beginner-Friendly – Perfect for developers learning CLI interaction in Laravel.
+
+8. Reusable Demo Framework – Can be used as a base for any interactive CLI-based project in Laravel.
+
+---
+
+
+
+## Installation Steps
+
+
+---
+
+
+## STEP 1: Create Laravel 12 Project
+
+### Open terminal / CMD and run:
+
+```
+composer create-project laravel/laravel PHP_Laravel12_Prompts "12.*"
+
+```
+
+### Go inside project:
+
+```
+cd PHP_Laravel12_Prompts
+
+```
+
+#### Explanation:
+
+Installs a fresh Laravel 12 project and navigates into the project folder.
+
+
+
+
+
+## STEP 2: Database Setup (Optional)
+
+### Update database details:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel12_prompt
+DB_USERNAME=root
+DB_PASSWORD=
+
+```
+
+### Create database in MySQL / phpMyAdmin:
+
+```
+Database name: laravel12_prompt
+
+```
+
+#### Explanation:
+
+Sets up a MySQL database connection for future use in your Laravel app.
+
+
+
+
+
+## STEP 3: Install Prompt Packages
+
+### Install the package:
+
+```
+composer require laravel/prompts
+
+```
+
+
+#### Explanation:
+
+Installs the Laravel Prompts package (only needed if using Laravel 13+; for Laravel 12, built-in methods will work).
+
+
+
+
+
+## STEP 4: Make a New Artisan Command
+
+### Run:
+
+```
+php artisan make:command DemoPromptCommand
+
+```
+
+### This creates: app/Console/Commands/DemoPromptCommand.php
+
+```
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class DemoPromptCommand extends Command
+{
+    protected $signature = 'prompt:demo';
+    protected $description = 'Demo interactive prompts in Laravel 12';
+
+    public function handle()
+    {
+        $this->info("Laravel 12 Interactive CLI Demo");
+
+        // Ask for text input
+        $name = $this->ask('What is your name?');
+
+        // Confirm yes/no
+        $confirm = $this->confirm('Do you want to proceed?', true);
+
+        if (! $confirm) {
+            $this->warn("Action cancelled!");
+            return;
+        }
+
+        // Choice prompt
+        $language = $this->choice(
+            'Choose your favorite language',
+            ['PHP', 'JavaScript', 'Python'],
+            0
+        );
+
+        $this->info("Your name is: $name");
+        $this->info("Favorite language: $language");
+        $this->info(" Prompt execution finished!");
+    }
+}
+
+```
+
+#### Explanation:
+
+Generates a new command to create interactive CLI prompts.
+
+This command demonstrates text input, confirmation, and selection prompts.
+
+
+
+
+
+
+## STEP 5: Run the Prompt Command
+
+### Run:
+
+```
+php artisan prompt:demo
+
+```
+
+
+### You will see:
+
+```
+What is your name?
+> _
+
+Do you want to proceed? (yes/no) [yes]
+> _
+
+Choose your favorite language
+?  > PHP
+   > JavaScript
+   > Python
+
+```
+
+
+### You will see this type:
+
+
+<img width="1439" height="440" alt="Screenshot 2026-02-27 171830" src="https://github.com/user-attachments/assets/b0214161-c4a6-4682-9317-4fff25041ca3" />
+
+
+
+#### Explanation:
+
+Runs the demo prompt command and interactively collects user input.
+
+Creates a new command to simulate a user registration workflow.
+
+Collects email, password, and user confirmation interactively in the CLI.
+
+
+
+
+## STEP 7: Add Another Prompt Example
+
+### You can make another example command:
+
+```
+php artisan make:command RegistrationPrompt
+
+```
+
+### Replace in app/Console/Commands/RegistrationPrompt.php:
+
+```
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class RegistrationPrompt extends Command
+{
+    protected $signature = 'prompt:register';
+    protected $description = 'Collect user registration through interactive prompts in Laravel 12';
+
+    public function handle()
+    {
+        $this->info("User Registration");
+
+        // Ask for email
+        $email = $this->ask('Enter your email');
+
+        // Ask for password (hidden input)
+        $password = $this->secret('Enter a password');
+
+        // Confirm terms
+        $terms = $this->confirm('Do you accept terms and conditions?', false);
+
+        if (! $terms) {
+            $this->error("You must accept terms!");
+            return;
+        }
+
+        $this->info("Registered successfully with email: $email");
+    }
+}
+
+```
+
+
+### Run:
+
+```
+php artisan prompt:register
+
+```
+
+### You will see this type:
+
+
+<img width="1466" height="364" alt="Screenshot 2026-02-27 171205" src="https://github.com/user-attachments/assets/80e12e14-b53d-498a-9cdd-b300d05b6f6c" />
+
+
+
+
+#### Explanation:
+
+Executes the registration prompt command in the terminal.
+
+Creates a main menu command to run multiple prompt commands from a single interface.
+
+Allows the user to select and run either the demo or registration command from a simple menu.
+
+
+
+
+
+
+
+
+## STEP 8: Create a Demo Menu Command
+
+### You can create a main menu to run multiple prompt commands:
+
+```
+php artisan make:command PromptMenu
+
+```
+
+### Replace in app/Console/Commands/PromptMenu.php
+
+```
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class PromptMenu extends Command
+{
+    /**
+     * The name and signature of the console command.
+     */
+    protected $signature = 'prompt:menu';
+
+    /**
+     * The console command description.
+     */
+    protected $description = 'Main menu to run all prompt demos';
+
+    public function handle()
+    {
+        $this->info(" Welcome to Laravel 12 CLI Menu \n");
+
+        // Use built-in choice() instead of Prompts::select
+        $choice = $this->choice(
+            'Select a demo to run',
+            ['User Registration', 'Demo Prompt'],
+            0 // default index
+        );
+
+        if ($choice === 'User Registration') {
+            $this->call('prompt:register');
+        } else {
+            $this->call('prompt:demo');
+        }
+
+        $this->newLine();
+        $this->info(" Menu finished!");
+    }
+}
+
+```
+
+
+### Then you just run:
+
+```
+php artisan prompt:menu
+
+```
+
+
+### You will see this type:
+
+
+<img width="1462" height="558" alt="Screenshot 2026-02-27 172421" src="https://github.com/user-attachments/assets/8721e4ce-1617-4c7f-8aaf-187f48bf7e9c" />
+
+
+#### Explanation:
+
+Displays the main menu and executes the chosen command interactively.
+
+
+
+
+---
+
+# Project Folder Structure:
+
+```
+PHP_Laravel12_Prompts/
+├── app/
+│   └── Console/
+│       └── Commands/
+│           ├── DemoPromptCommand.php
+│           ├── RegistrationPrompt.php
+│           └── PromptMenu.php
+├── artisan
+├── composer.json
+└── .env
+
+```
+
