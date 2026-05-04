@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\CliUser;
+use Illuminate\Support\Facades\Hash;
 
 class RegistrationPrompt extends Command
 {
@@ -16,8 +18,19 @@ class RegistrationPrompt extends Command
         // Ask for email
         $email = $this->ask('Enter your email');
 
+        // Validate email 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->error("Invalid email format!");
+            return;
+        }
+
         // Ask for password (hidden input)
         $password = $this->secret('Enter a password');
+
+        if (strlen($password) < 6) {
+            $this->error("Password must be at least 6 characters!");
+            return;
+        }
 
         // Confirm terms
         $terms = $this->confirm('Do you accept terms and conditions?', false);
@@ -27,6 +40,13 @@ class RegistrationPrompt extends Command
             return;
         }
 
+        // Save to database
+        CliUser::create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        // Success message
         $this->info("✅ Registered successfully with email: $email");
     }
 }

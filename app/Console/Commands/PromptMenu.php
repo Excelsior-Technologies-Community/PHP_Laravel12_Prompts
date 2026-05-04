@@ -20,15 +20,24 @@ class PromptMenu extends Command
     {
         $this->info("✨ Welcome to Laravel 12 CLI Menu ✨\n");
 
-        // Use built-in choice() instead of Prompts::select
+        // Updated menu options
         $choice = $this->choice(
             'Select a demo to run',
-            ['User Registration', 'Demo Prompt'],
-            0 // default index
+            [
+                'User Registration',
+                'View Users',
+                'Demo Prompt'
+            ],
+            0
         );
 
+        // Handle user selection
         if ($choice === 'User Registration') {
             $this->call('prompt:register');
+
+        } elseif ($choice === 'View Users') {
+            $this->call('prompt:users');
+
         } else {
             $this->call('prompt:demo');
         }
