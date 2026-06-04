@@ -14,35 +14,58 @@ class PromptMenu extends Command
     /**
      * The console command description.
      */
-    protected $description = 'Main menu to run all prompt demos';
+    protected $description = 'Main menu to run all prompt demos, view history, and export data';
 
     public function handle()
     {
         $this->info("✨ Welcome to Laravel 12 CLI Menu ✨\n");
 
-        // Updated menu options
         $choice = $this->choice(
-            'Select a demo to run',
+            'Select an option:',
             [
                 'User Registration',
                 'View Users',
-                'Demo Prompt'
+                'Demo Prompt',
+                'View Prompt History',
+                'Export/Import Prompts'
             ],
             0
         );
 
-        // Handle user selection
-        if ($choice === 'User Registration') {
-            $this->call('prompt:register');
-
-        } elseif ($choice === 'View Users') {
-            $this->call('prompt:users');
-
-        } else {
-            $this->call('prompt:demo');
+        switch ($choice) {
+            case 'User Registration':
+                $this->call('prompt:register');
+                break;
+            case 'View Users':
+                $this->call('prompt:users');
+                break;
+            case 'Demo Prompt':
+                $this->call('prompt:demo');
+                break;
+            case 'View Prompt History':
+                $this->showHistory();
+                break;
+            case 'Export/Import Prompts':
+                $this->call('prompt:export-import');
+                break;
         }
 
         $this->newLine();
         $this->info("✅ Menu finished!");
     }
+
+   protected function showHistory()
+{
+    
+    $histories = \App\Models\PromptHistory::latest()->take(10)->get();
+
+    if ($histories->isEmpty()) {
+        $this->warn('No history found!');
+        return;
+    }
+
+    $this->table(['ID', 'Prompt', 'Response', 'Created At'], $histories->map(function ($item) {
+        return [$item->id, $item->prompt_text, substr($item->response, 0, 20) . '...', $item->created_at->format('Y-m-d')];
+    }));
+}
 }
